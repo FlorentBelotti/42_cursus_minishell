@@ -70,5 +70,47 @@
             <li><code>ft_pwd.c</code>: Implementation of the `pwd` built-in command.</li>
             <li><code>ft_unset.c</code>: Implementation of the `unset` built-in command.</li>
         </ul>
+        <h2>Feedback</h2>
+        <h3>By Florent Belotti</h3>
+        <p>Minishell is one of the most daunting projects for 42 students, primarily due to feedback from previous cohorts. It’s our first group project, which means learning to collaborate on developing a program. Finding a good working dynamic with your partner is crucial.</p>
+        <p>This project is complex and often requires rethinking certain parts to integrate all necessary components. After completing a significant portion of the project, it is essential to redo series of tests whenever there is a change in logic to fix bugs. Therefore, it is important not to overload with tests and to remain reasonable about their number to validate the subject.</p>    
+        <h2>Organization and Task Distribution</h2>
+        <p>In our group, named "the brute and the cunning", ZomDev and I decided to clearly separate our responsibilities: he handled the parsing, and I took care of the execution. ZomDev, being slightly ahead in the curriculum, started before I did. His work on parsing allowed me to quickly develop an execution logic.</p>
+    <h2>Execution Breakdown</h2>
+    <p>For this project, I divided the execution into four main parts:</p>
+    <ol>
+        <li>
+            <strong>Redirections:</strong>
+            <p>It was crucial to define a method that would allow calling the same redirection function regardless of the execution case. This part took a lot of time, especially since I wasn't very comfortable with the concept after the Pipex project. Now, I feel more confident and proficient in this area.</p>
+        </li>
+        <li>
+            <strong>Execution Loop:</strong>
+            <p>Coming from Pipex, the execution loop seemed more straightforward, although Minishell required some adjustments, particularly for implementing certain builtins and managing memory leaks.</p>
+        </li>
+        <li>
+            <strong>Implementing Builtins:</strong>
+            <p>This part was the simplest, resembling the logic of the piscine and the first projects at the school. It didn't pose much difficulty.</p>
+        </li>
+        <li>
+            <strong>Error Code Management:</strong>
+            <p>My inexperience led me to consider this aspect only at the end of the "mechanical" development of the execution. This forced me to rethink part of the organization of my execution and perform tedious tasks, such as changing the return of certain functions. I suggest considering error management from the beginning, systematically researching the possible errors for each part of the execution and implementing them immediately.</p>
+        </li>
+    </ol>
+    <h2>Conclusion</h2>
+    <p>Overall, my experience with Minishell was less stressful than some of my peers. Although I felt some pressure as my blackhole approached, being only a month away from the submission date, I benefited from the support of my more experienced partner. We collaborated effectively when I encountered difficulties. It is normal to feel lost with this project, whether it’s the parsing or execution. Working on the execution highlighted the true value of the 42 curriculum. I was able to seek technical help from previous cohorts and exchange ideas with other students also working on Minishell.</p>
+    <h2>Specials thanks</h1>
+    <p>
+        To <a href="https://github.com/JayZ66">Jeguerin (JayZ66)</a>: who guided me on several small elements that would have become major problems over time. Without her, I would have submitted my project much later.
+    </p>
+    <p>
+        To <a href="https://github.com/Tulece">Anporced (Tulece)</a>: whose boundless imagination in creating increasingly tricky tests was invaluable. Without his mischievous intelligence, I would have submitted an execution with far more errors and inaccuracies.
+    </p>
+    <p>
+        To <a href="https://github.com/ThomasRibalta">Thoribal (Thomas Ribalta)</a>: who provided guidance on the project's logic and, more broadly, on its organization.
+    </p>
+</body>
+</html>
+</body>
+</html>
 </body>
 </html>
