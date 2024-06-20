@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:04:46 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/12 12:15:33 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-int	check_for_n_arg(char *arg)
+int check_for_n_arg(char *arg)
 {
-	int	i;
+	int i;
 
 	i = 1;
 	if (!arg)
@@ -31,10 +31,10 @@ int	check_for_n_arg(char *arg)
 	return (0);
 }
 
-int	ft_echo(t_command *cmd)
+int ft_echo(t_command *cmd)
 {
-	int	newline_flag;
-	int	i;
+	int newline_flag;
+	int i;
 
 	newline_flag = 1;
 	i = 1;

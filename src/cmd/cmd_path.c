@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 00:58:46 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/12 11:13:17 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-char	**extract_path_from_env(t_env *env)
+char **extract_path_from_env(t_env *env)
 {
 	while (env)
 	{
@@ -23,7 +23,7 @@ char	**extract_path_from_env(t_env *env)
 	return (NULL);
 }
 
-int	is_absolute_path(char *cmd)
+int is_absolute_path(char *cmd)
 {
 	if (cmd[0] == '/' && cmd[1])
 		return (1);
@@ -32,12 +32,12 @@ int	is_absolute_path(char *cmd)
 	return (0);
 }
 
-char	*found_path(char *cmd, t_env *env)
+char *found_path(char *cmd, t_env *env)
 {
-	char	*each_path;
-	char	*exec_path;
-	char	**paths;
-	int		i;
+	char *each_path;
+	char *exec_path;
+	char **paths;
+	int i;
 
 	i = 0;
 	if (is_absolute_path(cmd))
@@ -59,9 +59,9 @@ char	*found_path(char *cmd, t_env *env)
 	return (NULL);
 }
 
-int	check_cmd_path_loop(char *each_path, char *ex_path, char **paths, char *cmd)
+int check_cmd_path_loop(char *each_path, char *ex_path, char **paths, char *cmd)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (paths[i])
@@ -81,11 +81,11 @@ int	check_cmd_path_loop(char *each_path, char *ex_path, char **paths, char *cmd)
 	return (0);
 }
 
-int	check_cmd_path(char *cmd, t_env *env)
+int check_cmd_path(char *cmd, t_env *env)
 {
-	char	*each_path;
-	char	*exec_path;
-	char	**paths;
+	char *each_path;
+	char *exec_path;
+	char **paths;
 
 	each_path = NULL;
 	exec_path = NULL;

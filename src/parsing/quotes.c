@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tohma <tohma@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 20:02:09 by tohma             #+#    #+#             */
-/*   Updated: 2024/06/07 12:01:22 by tohma            ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
 /**
  * @brief Takes a pointer on a quote char and search for its twin
  * @return (int) Index of the twin quote
-*/
-int	is_quote_closed(char *str)
+ */
+int is_quote_closed(char *str)
 {
-	char	quote;
-	int		i;
+	char quote;
+	int i;
 
 	quote = *str;
 	i = 0;
@@ -29,12 +29,12 @@ int	is_quote_closed(char *str)
 	return (0);
 }
 
-static void	parse_word(t_string_part **parts, char *str,
-	t_exec *exec, char quote)
+static void parse_word(t_string_part **parts, char *str,
+					   t_exec *exec, char quote)
 {
-	char	*to_put;
-	int		last_cpy_index;
-	int		i;
+	char *to_put;
+	int last_cpy_index;
+	int i;
 
 	i = -1;
 	last_cpy_index = 0;
@@ -47,7 +47,7 @@ static void	parse_word(t_string_part **parts, char *str,
 		if (to_put[i] == '$' && to_put[i + 1])
 		{
 			push_str_part(parts,
-				ft_strncpy(to_put + last_cpy_index, i - last_cpy_index));
+						  ft_strncpy(to_put + last_cpy_index, i - last_cpy_index));
 			push_str_part(parts, get_env_variable(exec, to_put + i));
 			i += ft_strchr_nalphanum(to_put + i + 1) + (str[i + 1] == '?');
 			last_cpy_index = i + 1;
@@ -55,13 +55,13 @@ static void	parse_word(t_string_part **parts, char *str,
 	}
 	if (i - last_cpy_index > 0)
 		push_str_part(parts,
-			ft_strncpy(to_put + last_cpy_index, i - last_cpy_index));
+					  ft_strncpy(to_put + last_cpy_index, i - last_cpy_index));
 	ft_free(to_put);
 }
 
-static int	rem_double_quotes(t_string_part **parts, char *str, t_exec *exec)
+static int rem_double_quotes(t_string_part **parts, char *str, t_exec *exec)
 {
-	int	end_quote;
+	int end_quote;
 
 	end_quote = is_quote_closed(str);
 	if (!end_quote)
@@ -71,9 +71,9 @@ static int	rem_double_quotes(t_string_part **parts, char *str, t_exec *exec)
 	return (end_quote);
 }
 
-static int	rem_single_quotes(t_string_part **parts, char *str)
+static int rem_single_quotes(t_string_part **parts, char *str)
 {
-	int	end_quote;
+	int end_quote;
 
 	end_quote = is_quote_closed(str);
 	if (!end_quote)
@@ -83,12 +83,12 @@ static int	rem_single_quotes(t_string_part **parts, char *str)
 	return (end_quote);
 }
 
-char	*rem_quotes(char *str, t_exec *exec)
+char *rem_quotes(char *str, t_exec *exec)
 {
-	t_string_part	*parts;
-	char			*res;
-	int				i;
-	int				quote_end;
+	t_string_part *parts;
+	char *res;
+	int i;
+	int quote_end;
 
 	parts = NULL;
 	i = -1;
@@ -105,7 +105,7 @@ char	*rem_quotes(char *str, t_exec *exec)
 			i += ft_strchr_quotes(str + i) - 1;
 		}
 		if (quote_end == -1)
-			break ;
+			break;
 		if (quote_end > 0)
 			i += quote_end;
 	}

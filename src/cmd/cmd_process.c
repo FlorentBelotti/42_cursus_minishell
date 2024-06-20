@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: truello <truello@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 18:26:25 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/13 15:52:42 by truello          ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-void	free_all_in_child(t_exec *exec, t_command *cmd, t_env *env)
+void free_all_in_child(t_exec *exec, t_command *cmd, t_env *env)
 {
 	if (env)
 		free_env(env);
@@ -26,9 +26,9 @@ void	free_all_in_child(t_exec *exec, t_command *cmd, t_env *env)
 		free_command(cmd);
 }
 
-void	child_process(t_exec *exec, t_command *cmd, t_env *env)
+void child_process(t_exec *exec, t_command *cmd, t_env *env)
 {
-	char	**ep;
+	char **ep;
 
 	if (cmd->builtin_flag)
 	{
@@ -44,7 +44,7 @@ void	child_process(t_exec *exec, t_command *cmd, t_env *env)
 			if (execve(found_path(cmd->parts[0], env), cmd->parts, ep) == -1)
 			{
 				printf("-minishell: %s: No such file or directory\n",
-					cmd->parts[0]);
+					   cmd->parts[0]);
 				free_all_in_child(exec, cmd, env);
 				free_parts(ep);
 				exit(EXIT_FAILURE);
@@ -55,9 +55,9 @@ void	child_process(t_exec *exec, t_command *cmd, t_env *env)
 	}
 }
 
-void	close_unused_pipes(t_exec *exec, int i)
+void close_unused_pipes(t_exec *exec, int i)
 {
-	int	j;
+	int j;
 
 	j = 0;
 	while (j < exec->cmd_nb - 1)
@@ -70,7 +70,7 @@ void	close_unused_pipes(t_exec *exec, int i)
 	}
 }
 
-void	handle_redir_leaving_exec(int i, t_exec *exec)
+void handle_redir_leaving_exec(int i, t_exec *exec)
 {
 	if (i > 0)
 		close(exec->pipes[i - 1][0]);
@@ -78,7 +78,7 @@ void	handle_redir_leaving_exec(int i, t_exec *exec)
 		close(exec->pipes[i][1]);
 }
 
-void	handle_redir_entering_exec(int i, t_exec *exec)
+void handle_redir_entering_exec(int i, t_exec *exec)
 {
 	if (i > 0)
 		dup2(exec->pipes[i - 1][0], STDIN_FILENO);

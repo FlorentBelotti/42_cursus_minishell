@@ -6,15 +6,15 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 15:32:05 by tohma             #+#    #+#             */
-/*   Updated: 2024/06/06 14:47:32 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-t_env	*newenv(char *name, char *content)
+t_env *newenv(char *name, char *content)
 {
-	t_env	*var;
+	t_env *var;
 
 	if (!name || !content)
 		return (NULL);
@@ -26,10 +26,10 @@ t_env	*newenv(char *name, char *content)
 	return (var);
 }
 
-void	free_env(t_env *env)
+void free_env(t_env *env)
 {
 	if (!env)
-		return ;
+		return;
 	if (env->next)
 		free_env(env->next);
 	free(env->name);
@@ -37,9 +37,9 @@ void	free_env(t_env *env)
 	free(env);
 }
 
-void	push_env(t_env **env, t_env *env_var)
+void push_env(t_env **env, t_env *env_var)
 {
-	t_env	*tmp;
+	t_env *tmp;
 
 	if (!*env)
 		*env = env_var;
@@ -52,9 +52,9 @@ void	push_env(t_env **env, t_env *env_var)
 	}
 }
 
-static char	*get_var_content(char *var_name, char *base_content)
+static char *get_var_content(char *var_name, char *base_content)
 {
-	int	shlvl;
+	int shlvl;
 
 	if (ft_strcmp(var_name, "SHLVL"))
 	{
@@ -66,11 +66,11 @@ static char	*get_var_content(char *var_name, char *base_content)
 		return (base_content);
 }
 
-t_env	*make_env(char **envp)
+t_env *make_env(char **envp)
 {
-	t_env	*env;
-	int		first_equal_index;
-	char	*var_name;
+	t_env *env;
+	int first_equal_index;
+	char *var_name;
 
 	env = NULL;
 	if (!envp || !*envp)
@@ -80,7 +80,7 @@ t_env	*make_env(char **envp)
 		first_equal_index = ft_strchr_i(*envp, '=');
 		var_name = ft_strncpy(*envp, first_equal_index);
 		push_env(&env, newenv(var_name, get_var_content(var_name,
-					ft_strcpy((*envp) + first_equal_index + 1))));
+														ft_strcpy((*envp) + first_equal_index + 1))));
 		envp++;
 	}
 	return (env);

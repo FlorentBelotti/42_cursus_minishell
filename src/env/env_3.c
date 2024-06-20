@@ -6,15 +6,15 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:51:54 by tohma             #+#    #+#             */
-/*   Updated: 2024/06/08 15:32:53 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-char	*get_last_status_code(t_exec *exec)
+char *get_last_status_code(t_exec *exec)
 {
-	int		status_code;
+	int status_code;
 
 	status_code = -256;
 	if (WIFEXITED(exec->exit_code))

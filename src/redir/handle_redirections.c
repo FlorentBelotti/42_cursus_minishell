@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:27:39 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/12 14:23:45 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-int	handle_redirections(t_redirections *redir, t_exec *exec)
+int handle_redirections(t_redirections *redir, t_exec *exec)
 {
-	int	flag;
+	int flag;
 
 	flag = 0;
 	exec->output_fd = STDOUT_FILENO;
@@ -37,9 +37,9 @@ int	handle_redirections(t_redirections *redir, t_exec *exec)
 	return (0);
 }
 
-int	handle_input_redirection(char *path)
+int handle_input_redirection(char *path)
 {
-	int	fd;
+	int fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
@@ -52,13 +52,13 @@ int	handle_input_redirection(char *path)
 		close(fd);
 		return (1);
 	}
-	close (fd);
+	close(fd);
 	return (0);
 }
 
-int	handle_output_redirection(char *path, t_exec *exec)
+int handle_output_redirection(char *path, t_exec *exec)
 {
-	int	fd;
+	int fd;
 
 	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
@@ -72,14 +72,14 @@ int	handle_output_redirection(char *path, t_exec *exec)
 		return (1);
 	}
 	if (exec->output_fd != STDOUT_FILENO)
-		close (exec->output_fd);
+		close(exec->output_fd);
 	exec->output_fd = fd;
 	return (0);
 }
 
-int	handle_append_redirection(char *path)
+int handle_append_redirection(char *path)
 {
-	int	fd;
+	int fd;
 
 	fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
@@ -92,13 +92,13 @@ int	handle_append_redirection(char *path)
 		close(fd);
 		return (1);
 	}
-	close (fd);
+	close(fd);
 	return (0);
 }
 
-int	handle_here_doc_redirection(char *path, t_exec *exec)
+int handle_here_doc_redirection(char *path, t_exec *exec)
 {
-	char	*line;
+	char *line;
 
 	exec->input_fd = open("here_doc.txt", O_RDWR | O_CREAT | O_TRUNC, 0600);
 	if (exec->input_fd == -1)
@@ -112,7 +112,7 @@ int	handle_here_doc_redirection(char *path, t_exec *exec)
 		if (hd_strncmp(line, path, ft_strlen(path)) == 0)
 		{
 			free(line);
-			break ;
+			break;
 		}
 		ft_putstr_fd(line, exec->input_fd);
 		free(line);

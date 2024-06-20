@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   strutills.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tohma <tohma@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:48:33 by tohma             #+#    #+#             */
-/*   Updated: 2024/05/14 15:28:38 by tohma            ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-void	free_str_parts(t_string_part *parts)
+void free_str_parts(t_string_part *parts)
 {
 	if (!parts)
-		return ;
+		return;
 	if (parts->next)
 		free_str_parts(parts->next);
 	free(parts->part);
 	free(parts);
 }
 
-void	push_str_part(t_string_part **str_parts, char *part)
+void push_str_part(t_string_part **str_parts, char *part)
 {
-	t_string_part	*str_part;
-	t_string_part	*tmp;
+	t_string_part *str_part;
+	t_string_part *tmp;
 
 	str_part = ft_calloc(1, sizeof(t_string_part));
 	if (!str_part || !part || part[0] == '\0')
-		return (ft_free(part), ft_free(str_part), (void) 0);
+		return (ft_free(part), ft_free(str_part), (void)0);
 	str_part->part = part;
 	if (!*str_parts)
 		*str_parts = str_part;
@@ -45,12 +45,12 @@ void	push_str_part(t_string_part **str_parts, char *part)
 /**
  * @brief Takes string parts and builds a new string from them
  * 	(frees the original parts)
-*/
-char	*build_str(t_string_part *parts)
+ */
+char *build_str(t_string_part *parts)
 {
-	char			*res;
-	char			*tmp_str;
-	t_string_part	*tmp;
+	char *res;
+	char *tmp_str;
+	t_string_part *tmp;
 
 	res = NULL;
 	if (!parts)
@@ -72,10 +72,10 @@ char	*build_str(t_string_part *parts)
 	return (res);
 }
 
-void	print_str_parts(t_string_part *parts)
+void print_str_parts(t_string_part *parts)
 {
 	if (!parts)
-		return ;
+		return;
 	while (parts)
 	{
 		printf("%s\n", parts->part);

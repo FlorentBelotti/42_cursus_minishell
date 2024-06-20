@@ -6,15 +6,15 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:04:39 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/06 10:37:57 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-int	check_cd_arg(t_command *cmd)
+int check_cd_arg(t_command *cmd)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (cmd->parts[i])
@@ -28,7 +28,7 @@ int	check_cd_arg(t_command *cmd)
 	}
 }
 
-void	update_env_for_valid_path(char *old_pwd, char *curr_dir, t_env *env)
+void update_env_for_valid_path(char *old_pwd, char *curr_dir, t_env *env)
 {
 	update_env(ft_strcpy(old_pwd), ft_strcpy("OLDPWD"), env);
 	curr_dir = get_current_working_directory();
@@ -36,7 +36,7 @@ void	update_env_for_valid_path(char *old_pwd, char *curr_dir, t_env *env)
 	free(curr_dir);
 }
 
-void	update_env_for_home_path(char *old_pwd, char *curr_dir, t_env *env)
+void update_env_for_home_path(char *old_pwd, char *curr_dir, t_env *env)
 {
 	chdir(getenv("HOME"));
 	curr_dir = get_current_working_directory();
@@ -45,10 +45,10 @@ void	update_env_for_home_path(char *old_pwd, char *curr_dir, t_env *env)
 	free(curr_dir);
 }
 
-int	ft_cd(t_command *cmd, t_env *env)
+int ft_cd(t_command *cmd, t_env *env)
 {
-	char	*old_pwd;
-	char	*curr_dir;
+	char *old_pwd;
+	char *curr_dir;
 
 	if (check_cd_arg(cmd) == 1)
 		return (1);

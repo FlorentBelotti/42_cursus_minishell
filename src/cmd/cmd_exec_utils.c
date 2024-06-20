@@ -6,13 +6,13 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:10:04 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/13 11:34:16 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-void	manage_exec_structure(char *line, t_exec *exec, t_command *cmd)
+void manage_exec_structure(char *line, t_exec *exec, t_command *cmd)
 {
 	exec->cmd_nb = get_nb_of_commands(cmd);
 	exec->pipes = create_pipes(exec->cmd_nb - 1);
@@ -22,24 +22,23 @@ void	manage_exec_structure(char *line, t_exec *exec, t_command *cmd)
 	exec->pids = ft_calloc(exec->cmd_nb, sizeof(int));
 }
 
-int	search_for_exit(t_command *cmd)
+int search_for_exit(t_command *cmd)
 {
-	t_command	*current;
+	t_command *current;
 
 	current = cmd;
 	while (current)
 	{
-		if (cmd->builtin_flag == BUILTIN_EXIT
-			|| cmd->builtin_flag == BUILTIN_ECHO)
+		if (cmd->builtin_flag == BUILTIN_EXIT || cmd->builtin_flag == BUILTIN_ECHO)
 			return (1);
 		current = current->next;
 	}
 	return (0);
 }
 
-static int	check_command_path_flag(t_command *cmd, t_env *env)
+static int check_command_path_flag(t_command *cmd, t_env *env)
 {
-	int	path_flag;
+	int path_flag;
 
 	if (cmd->builtin_flag == 0 && cmd->parts[0] != NULL)
 	{
@@ -55,10 +54,10 @@ static int	check_command_path_flag(t_command *cmd, t_env *env)
 	return (1);
 }
 
-int	is_command_valid(t_command *cmds, t_env *env)
+int is_command_valid(t_command *cmds, t_env *env)
 {
-	t_command	*cur;
-	int			status;
+	t_command *cur;
+	int status;
 
 	cur = cmds;
 	while (cur)

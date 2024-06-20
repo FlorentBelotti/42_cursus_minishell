@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: truello <truello@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:04:58 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/06 17:42:33 by truello          ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-int	check_export_operator(char *str)
+int check_export_operator(char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i] && str[i] != '=')
@@ -27,9 +27,9 @@ int	check_export_operator(char *str)
 	return (0);
 }
 
-int	is_only_digit(char *str)
+int is_only_digit(char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i])
@@ -41,9 +41,9 @@ int	is_only_digit(char *str)
 	return (TRUE);
 }
 
-void	print_env_for_export(t_env *env)
+void print_env_for_export(t_env *env)
 {
-	t_env	*curr;
+	t_env *curr;
 
 	curr = env;
 	while (curr)
@@ -53,7 +53,7 @@ void	print_env_for_export(t_env *env)
 	}
 }
 
-int	check_export_arg(t_command *cmd)
+int check_export_arg(t_command *cmd)
 {
 	if (ft_strchr(cmd->parts[1], '=') == FALSE)
 	{
@@ -65,10 +65,10 @@ int	check_export_arg(t_command *cmd)
 	return (0);
 }
 
-int	ft_export(t_command *cmd, t_env *env)
+int ft_export(t_command *cmd, t_env *env)
 {
-	t_env	*current_env;
-	char	**new_var;
+	t_env *current_env;
+	char **new_var;
 
 	if (!cmd->parts[1])
 	{
@@ -84,7 +84,7 @@ int	ft_export(t_command *cmd, t_env *env)
 		if (ft_strncmp(current_env->name, new_var[0], ft_strlen(new_var[0])))
 		{
 			remove_env_var(env, current_env->name);
-			break ;
+			break;
 		}
 		current_env = current_env->next;
 	}

@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   command_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tohma <tohma@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 12:47:40 by tohma             #+#    #+#             */
-/*   Updated: 2024/05/14 15:45:03 by tohma            ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
 /**
  * @brief Takes string parts and builds an array containing every part
  * (frees the original linked list)
-*/
-char	**build_parts(t_string_part *cmd_parts)
+ */
+char **build_parts(t_string_part *cmd_parts)
 {
-	char			**res;
-	t_string_part	*tmp;
-	int				len;
-	int				i;
+	char **res;
+	t_string_part *tmp;
+	int len;
+	int i;
 
 	len = 0;
 	i = -1;
@@ -43,10 +43,10 @@ char	**build_parts(t_string_part *cmd_parts)
 	return (free_str_parts(cmd_parts), res);
 }
 
-void	set_builtin_flag(t_command *cmd)
+void set_builtin_flag(t_command *cmd)
 {
 	if (!cmd || !cmd->parts[0])
-		return ;
+		return;
 	if (ft_strcmp(cmd->parts[0], "echo"))
 		cmd->builtin_flag = BUILTIN_ECHO;
 	else if (ft_strcmp(cmd->parts[0], "cd"))
@@ -63,10 +63,10 @@ void	set_builtin_flag(t_command *cmd)
 		cmd->builtin_flag = BUILTIN_EXIT;
 }
 
-void	free_command(t_command *cmd)
+void free_command(t_command *cmd)
 {
 	if (!cmd)
-		return ;
+		return;
 	if (cmd->next)
 		free_command(cmd->next);
 	free_parts(cmd->parts);

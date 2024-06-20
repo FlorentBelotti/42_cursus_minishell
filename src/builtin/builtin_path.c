@@ -6,15 +6,15 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 11:37:25 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/11 12:15:14 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-void	builtin_in_child(t_command *cmd, t_env *env, t_exec *exec)
+void builtin_in_child(t_command *cmd, t_env *env, t_exec *exec)
 {
-	int	flag;
+	int flag;
 
 	flag = 0;
 	if (cmd->builtin_flag == BUILTIN_ECHO)
@@ -38,9 +38,9 @@ void	builtin_in_child(t_command *cmd, t_env *env, t_exec *exec)
 		exit(EXIT_SUCCESS);
 }
 
-void	builtin_out_child(int i, t_exec *exec, t_command *cmd, t_env *env)
+void builtin_out_child(int i, t_exec *exec, t_command *cmd, t_env *env)
 {
-	int	flag;
+	int flag;
 
 	flag = 0;
 	handle_redir_entering_exec(i, exec);
@@ -62,7 +62,7 @@ void	builtin_out_child(int i, t_exec *exec, t_command *cmd, t_env *env)
 		exec->exit_code = 0;
 }
 
-int	check_builtin_path(t_command *cmd)
+int check_builtin_path(t_command *cmd)
 {
 	if (cmd->builtin_flag > NOT_A_BUILTIN && cmd->builtin_flag <= BUILTIN_PWD)
 		return (0);

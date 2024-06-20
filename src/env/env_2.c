@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tohma <tohma@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 20:28:44 by tohma             #+#    #+#             */
-/*   Updated: 2024/06/07 12:00:01 by tohma            ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
 /**
  * @brief Expects a string starting with '$' and gives the name after it
@@ -18,9 +18,9 @@
  * @param var_name String containing the variable name
  * @return (char*) Ex: $PATH -> PATH
  */
-static char	*parse_var_name(char *var_name)
+static char *parse_var_name(char *var_name)
 {
-	int		i;
+	int i;
 
 	i = var_name[0] == '$';
 	if (!var_name || !ft_isalphanum_c(var_name[i]))
@@ -28,12 +28,12 @@ static char	*parse_var_name(char *var_name)
 	while (var_name[i] && ft_isalphanum_c(var_name[i]))
 		i++;
 	return (ft_strncpy(var_name + (var_name[0] == '$'),
-			i - (var_name[0] == '$')));
+					   i - (var_name[0] == '$')));
 }
 
-int	has_env_variable(t_env *env, char *name)
+int has_env_variable(t_env *env, char *name)
 {
-	char	*correct_name;
+	char *correct_name;
 
 	correct_name = parse_var_name(name);
 	while (env && correct_name)
@@ -46,10 +46,10 @@ int	has_env_variable(t_env *env, char *name)
 	return (FALSE);
 }
 
-char	*get_env_variable(t_exec *exec, char *var_name)
+char *get_env_variable(t_exec *exec, char *var_name)
 {
-	char	*correct_var_name;
-	t_env	*env;
+	char *correct_var_name;
+	t_env *env;
 
 	env = exec->env;
 	if (var_name[1] == '?')
@@ -65,7 +65,7 @@ char	*get_env_variable(t_exec *exec, char *var_name)
 	return (NULL);
 }
 
-void	print_env(t_env *env)
+void print_env(t_env *env)
 {
 	while (env)
 	{
@@ -74,13 +74,13 @@ void	print_env(t_env *env)
 	}
 }
 
-char	**build_env(t_env *env)
+char **build_env(t_env *env)
 {
-	int		len;
-	t_env	*tmp;
-	char	**res;
-	int		i;
-	char	*tmp_joined;
+	int len;
+	t_env *tmp;
+	char **res;
+	int i;
+	char *tmp_joined;
 
 	len = 0;
 	i = -1;
@@ -90,7 +90,7 @@ char	**build_env(t_env *env)
 		len++;
 		tmp = tmp->next;
 	}
-	res = (char **) ft_calloc(len + 1, sizeof(char *));
+	res = (char **)ft_calloc(len + 1, sizeof(char *));
 	if (!res)
 		return (NULL);
 	while (++i < len)

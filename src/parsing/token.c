@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tohma <tohma@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 11:59:48 by truello           #+#    #+#             */
-/*   Updated: 2024/06/07 12:00:25 by tohma            ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-t_token	*newtoken(char *data, int cmd_id, int is_text)
+t_token *newtoken(char *data, int cmd_id, int is_text)
 {
-	t_token	*token;
+	t_token *token;
 
 	if (!data)
 		return (NULL);
@@ -27,12 +27,12 @@ t_token	*newtoken(char *data, int cmd_id, int is_text)
 	return (token);
 }
 
-static void	push_token(t_token **toklist, t_token *token)
+static void push_token(t_token **toklist, t_token *token)
 {
-	t_token	*tmp;
+	t_token *tmp;
 
 	if (!toklist)
-		return ;
+		return;
 	if (!*toklist)
 		*toklist = token;
 	else
@@ -44,7 +44,7 @@ static void	push_token(t_token **toklist, t_token *token)
 	}
 }
 
-void	print_token_list(t_token *toklist)
+void print_token_list(t_token *toklist)
 {
 	while (toklist)
 	{
@@ -53,23 +53,23 @@ void	print_token_list(t_token *toklist)
 	}
 }
 
-void	free_token(t_token *token)
+void free_token(t_token *token)
 {
 	if (!token)
-		return ;
+		return;
 	if (token->next)
 		free_token(token->next);
 	free(token->data);
 	free(token);
 }
 
-t_token	*tokenize(char *line, t_exec *exec)
+t_token *tokenize(char *line, t_exec *exec)
 {
-	t_token	*token;
-	char	*token_part;
-	char	**cmds_part;
-	int		i;
-	int		parts_index;
+	t_token *token;
+	char *token_part;
+	char **cmds_part;
+	int i;
+	int parts_index;
 
 	token = NULL;
 	cmds_part = minishell_split(line, '|');
@@ -81,8 +81,7 @@ t_token	*tokenize(char *line, t_exec *exec)
 		{
 			token_part = ft_strcpy_wsp(cmds_part[parts_index] + i, &i);
 			push_token(&token, newtoken(rem_quotes(token_part, exec),
-					parts_index, (token_part[0] == '\'')
-					|| (token_part[0] == '\"')));
+										parts_index, (token_part[0] == '\'') || (token_part[0] == '\"')));
 			free(token_part);
 		}
 	}

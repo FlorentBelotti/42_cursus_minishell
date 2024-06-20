@@ -6,13 +6,13 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:42:07 by truello           #+#    #+#             */
-/*   Updated: 2024/05/02 11:33:58 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-char	get_redirection_char(int mode)
+char get_redirection_char(int mode)
 {
 	if (mode == REDIR_IN || mode == REDIR_HD)
 		return ('<');
@@ -20,10 +20,10 @@ char	get_redirection_char(int mode)
 		return ('>');
 }
 
-void	print_redirections(t_redirections *redirections)
+void print_redirections(t_redirections *redirections)
 {
 	if (!redirections)
-		return ;
+		return;
 	printf("\n--- Redirections START ---\n");
 	while (redirections)
 	{
@@ -33,10 +33,10 @@ void	print_redirections(t_redirections *redirections)
 	printf("--- Redirections END ---\n");
 }
 
-void	free_redirections(t_redirections *redirections)
+void free_redirections(t_redirections *redirections)
 {
 	if (!redirections)
-		return ;
+		return;
 	if (redirections->next)
 		free_redirections(redirections->next);
 	free(redirections->path);

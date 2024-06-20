@@ -6,16 +6,16 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:21:36 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/05 16:39:03 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-char	*get_current_working_directory(void)
+char *get_current_working_directory(void)
 {
-	char	*cwd;
-	char	buffer[1024];
+	char *cwd;
+	char buffer[1024];
 
 	if (getcwd(buffer, sizeof(buffer)))
 	{
@@ -28,9 +28,9 @@ char	*get_current_working_directory(void)
 	return (cwd);
 }
 
-void	add_env_variable(t_env *env, t_env *env_var)
+void add_env_variable(t_env *env, t_env *env_var)
 {
-	t_env	*tmp;
+	t_env *tmp;
 
 	if (!env)
 		env = env_var;
@@ -43,16 +43,16 @@ void	add_env_variable(t_env *env, t_env *env_var)
 	}
 }
 
-void	update_env(char *content, char *name, t_env *env)
+void update_env(char *content, char *name, t_env *env)
 {
 	remove_env_var(env, name);
 	add_env_variable(env, newenv(name, content));
 }
 
-int	remove_env_var(t_env *env, char *var_name)
+int remove_env_var(t_env *env, char *var_name)
 {
-	t_env	*current_env;
-	t_env	*previous;
+	t_env *current_env;
+	t_env *previous;
 
 	current_env = env;
 	previous = NULL;
@@ -75,9 +75,9 @@ int	remove_env_var(t_env *env, char *var_name)
 	return (FALSE);
 }
 
-int	get_args_nb(t_command *cmd)
+int get_args_nb(t_command *cmd)
 {
-	int	i;
+	int i;
 
 	i = 1;
 	while (cmd->parts[i])

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: truello <truello@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 12:27:10 by tohma             #+#    #+#             */
-/*   Updated: 2024/06/13 11:38:19 by truello          ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-extern int	g_signals;
+extern int g_signals;
 
-void	setup_signal_handler(void)
+void setup_signal_handler(void)
 {
-	struct sigaction	sa;
+	struct sigaction sa;
 
 	sa.sa_handler = sig_on_interrupt;
 	sigemptyset(&sa.sa_mask);
@@ -26,9 +26,9 @@ void	setup_signal_handler(void)
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
-void	sig_on_interrupt(int code)
+void sig_on_interrupt(int code)
 {
-	int	status;
+	int status;
 
 	status = 0;
 	(void)code;

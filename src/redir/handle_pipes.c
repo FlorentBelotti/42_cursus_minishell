@@ -6,16 +6,16 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:00:10 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/05 13:41:45 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-int	**create_pipes(int pipe_nb)
+int **create_pipes(int pipe_nb)
 {
-	int	i;
-	int	**pipes;
+	int i;
+	int **pipes;
 
 	i = 0;
 	if (pipe_nb <= 0)

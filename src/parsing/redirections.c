@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tohma <tohma@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:43:06 by truello           #+#    #+#             */
-/*   Updated: 2024/05/27 10:49:26 by tohma            ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-t_redirections	*newredirection(char *path, int mode)
+t_redirections *newredirection(char *path, int mode)
 {
-	t_redirections	*res;
+	t_redirections *res;
 
 	res = ft_calloc(1, sizeof(t_redirections));
 	if (!res)
@@ -25,7 +25,7 @@ t_redirections	*newredirection(char *path, int mode)
 	return (res);
 }
 
-static int	get_redirection_mode(char *s)
+static int get_redirection_mode(char *s)
 {
 	if (*s == '<')
 	{
@@ -42,16 +42,15 @@ static int	get_redirection_mode(char *s)
 	return (NO_REDIR);
 }
 
-t_redirections	*get_redirection(t_token *token, int mode)
+t_redirections *get_redirection(t_token *token, int mode)
 {
-	t_redirections	*res;
-	int				path_index;
+	t_redirections *res;
+	int path_index;
 
 	res = ft_calloc(1, sizeof(t_redirections));
 	if (!res)
 		return (NULL);
-	path_index = ft_strchr_i(token->data, get_redirection_char(mode)) + 1
-		+ (mode == REDIR_APP || mode == REDIR_HD);
+	path_index = ft_strchr_i(token->data, get_redirection_char(mode)) + 1 + (mode == REDIR_APP || mode == REDIR_HD);
 	if (token->data[path_index] != '\0')
 	{
 		token->used = 1;
@@ -69,10 +68,10 @@ t_redirections	*get_redirection(t_token *token, int mode)
 	return (res);
 }
 
-int	parse_redirection(t_redirections **redirections, t_token *token)
+int parse_redirection(t_redirections **redirections, t_token *token)
 {
-	int				redir_mode;
-	t_redirections	*newredir;
+	int redir_mode;
+	t_redirections *newredir;
 
 	if (!redirections || token->is_text)
 		return (FALSE);
@@ -86,13 +85,13 @@ int	parse_redirection(t_redirections **redirections, t_token *token)
 	return (TRUE);
 }
 
-void	push_redirections(t_redirections **redirections,
-		t_redirections *newredir)
+void push_redirections(t_redirections **redirections,
+					   t_redirections *newredir)
 {
-	t_redirections	*tmp;
+	t_redirections *tmp;
 
 	if (!redirections)
-		return ;
+		return;
 	if (!*redirections)
 		*redirections = newredir;
 	else

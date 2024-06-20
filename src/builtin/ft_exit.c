@@ -6,20 +6,20 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:04:42 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/10 11:24:32 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-int	ft_isalpha_c(char c)
+int ft_isalpha_c(char c)
 {
 	return (ft_isalpha(c));
 }
 
-int	is_only_alpha(char *str)
+int is_only_alpha(char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i])
@@ -31,9 +31,9 @@ int	is_only_alpha(char *str)
 	return (TRUE);
 }
 
-int	check_exit_arg(t_command *cmd)
+int check_exit_arg(t_command *cmd)
 {
-	int	arg_nb;
+	int arg_nb;
 
 	arg_nb = get_args_nb(cmd);
 	if (arg_nb > 1)
@@ -49,7 +49,7 @@ int	check_exit_arg(t_command *cmd)
 	return (0);
 }
 
-void	exec_memory_liberation(t_exec *exec)
+void exec_memory_liberation(t_exec *exec)
 {
 	if (exec->pipes != NULL)
 		free_pipes(exec->pipes, (exec->cmd_nb - 1));
@@ -60,10 +60,10 @@ void	exec_memory_liberation(t_exec *exec)
 	free(exec);
 }
 
-int	ft_exit(t_exec *exec, t_command *cmd, t_env *env)
+int ft_exit(t_exec *exec, t_command *cmd, t_env *env)
 {
-	int	status;
-	int	arg_nb;
+	int status;
+	int arg_nb;
 
 	arg_nb = get_args_nb(cmd);
 	if (arg_nb >= 1)

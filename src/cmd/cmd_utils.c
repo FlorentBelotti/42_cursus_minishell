@@ -6,15 +6,15 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 00:41:11 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/13 11:34:01 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-t_exec	*make_exec_structure(void)
+t_exec *make_exec_structure(void)
 {
-	t_exec	*exec;
+	t_exec *exec;
 
 	exec = malloc(sizeof(t_exec));
 	if (!exec)
@@ -25,9 +25,9 @@ t_exec	*make_exec_structure(void)
 	return (exec);
 }
 
-int	get_nb_of_commands(t_command *cmd)
+int get_nb_of_commands(t_command *cmd)
 {
-	int	cmd_nb;
+	int cmd_nb;
 
 	cmd_nb = 0;
 	while (cmd)
@@ -38,12 +38,12 @@ int	get_nb_of_commands(t_command *cmd)
 	return (cmd_nb);
 }
 
-void	ft_free_array(char **str)
+void ft_free_array(char **str)
 {
-	int	i;
+	int i;
 
 	if (!str)
-		return ;
+		return;
 	i = 0;
 	while (str[i])
 	{
@@ -53,9 +53,9 @@ void	ft_free_array(char **str)
 	free(str);
 }
 
-void	free_pipes(int **pipes, int pipe_nb)
+void free_pipes(int **pipes, int pipe_nb)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (i < pipe_nb)

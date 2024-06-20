@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: truello <truello@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 00:44:12 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/13 11:41:54 by truello          ###   ########.fr       */
+/*   Updated: 2024/06/20 11:49:09 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../Includes/minishell.h"
 
-extern int	g_signals;
+extern int g_signals;
 
-int	handle_pid(int i, t_exec *exec, t_command *cmd, t_env *env)
+int handle_pid(int i, t_exec *exec, t_command *cmd, t_env *env)
 {
-	int	pid;
+	int pid;
 
 	pid = fork();
 	if (pid == -1)
@@ -42,22 +42,22 @@ int	handle_pid(int i, t_exec *exec, t_command *cmd, t_env *env)
 	return (0);
 }
 
-void	exec_command(int i, t_exec *exec, t_command *cmd, t_env *env)
+void exec_command(int i, t_exec *exec, t_command *cmd, t_env *env)
 {
 	if (!cmd)
-		return ;
+		return;
 	g_signals = 1;
 	if (exec->pipes == NULL && check_builtin_path(cmd) == 1)
 		builtin_out_child(i, exec, cmd, env);
 	else
 	{
 		if (handle_pid(i, exec, cmd, env) == 1)
-			return ;
+			return;
 	}
 	exec_command(i + 1, exec, cmd->next, env);
 }
 
-static int	is_old_exit_code_needed(t_exec *exec, t_command *cmd)
+static int is_old_exit_code_needed(t_exec *exec, t_command *cmd)
 {
 	if (exec->cmd_nb == 1)
 	{
@@ -79,10 +79,10 @@ static int	is_old_exit_code_needed(t_exec *exec, t_command *cmd)
 	return (FALSE);
 }
 
-void	handle_waitpid(t_exec *exec, t_command *cmd)
+void handle_waitpid(t_exec *exec, t_command *cmd)
 {
-	int	i;
-	int	status;
+	int i;
+	int status;
 
 	i = 0;
 	status = 0;
@@ -92,17 +92,17 @@ void	handle_waitpid(t_exec *exec, t_command *cmd)
 		if (status != 0 && is_old_exit_code_needed(exec, cmd) == FALSE)
 		{
 			exec->exit_code = 1;
-			return ;
+			return;
 		}
 		else if (status == 0 && is_old_exit_code_needed(exec, cmd) == TRUE)
-			return ;
+			return;
 		else if (status == 0 && exec->error_flag == 0)
 			exec->exit_code = 0;
 		i++;
 	}
 }
 
-void	handle_execution(char *line, t_command *cmd, t_env *env, t_exec *exec)
+void handle_execution(char *line, t_command *cmd, t_env *env, t_exec *exec)
 {
 	manage_exec_structure(line, exec, cmd);
 	exec_command(0, exec, cmd, env);
