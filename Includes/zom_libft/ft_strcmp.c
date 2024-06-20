@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:16:01 by truello           #+#    #+#             */
-/*   Updated: 2024/05/29 23:02:15 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/20 14:55:14 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,8 @@ int	hd_strncmp(const char *s1, const char *s2, size_t n)
 
 	i = 0;
 	while (i < n && (unsigned char)s1[i] == (unsigned char)s2[i] && s1[i])
-	{
 		i++;
-	}
-	if (i == n || (s1[i] == '\0' && s2[i] == '\0'))
-	{
+	if ((i == n && s1[i + 1] == '\0') || (s1[i] == '\0' && s2[i] == '\0'))
 		return (0);
-	}
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
