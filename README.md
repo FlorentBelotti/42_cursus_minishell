@@ -98,7 +98,7 @@
     </ol>
     <h2>Conclusion</h2>
     <p>Overall, my experience with Minishell was less stressful than some of my peers. Although I felt some pressure as my blackhole approached, being only a month away from the submission date, I benefited from the support of my more experienced partner. We collaborated effectively when I encountered difficulties. It is normal to feel lost with this project, whether it’s the parsing or execution. Working on the execution highlighted the true value of the 42 curriculum. I was able to seek technical help from previous cohorts and exchange ideas with other students also working on Minishell.</p>
-    <h2>Specials thanks</h1>
+    <h2>Thanks</h1>
     <p>
         To <a href="https://github.com/JayZ66">Jeguerin (JayZ66)</a>: who guided me on several small elements that would have become major problems over time. Without her, I would have submitted my project much later.
     </p>
