@@ -149,8 +149,7 @@ The Minishell project is about creating a simple shell similar to bash. This pro
 ### Thanks![---------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 <section id="thanks">
 
-<p>Thanks to ZomDev for his guidance and help throughout this project. Special thanks to 42 for providing this enriching experience.</p>
-</section>
+<p>Thanks to ZomDev for his guidance and help throughout this project.
 
 </div>
 </div>
